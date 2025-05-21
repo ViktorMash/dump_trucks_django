@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мониторинг самосвалов</title>
+    <link rel="stylesheet" href="{% static 'trucks/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Мониторинг самосвалов</h1>
+
+        <!-- Фильтр над таблицей -->
+        <div class="filter-form">
+            <form method="get" action="{% url 'trucks:truck_list' %}">
+                <label for="model">Модель:</label>
+                <select name="model" id="model">
+                    <option value="all" {% if selected_model == 'all' %}selected{% endif %}>Все</option>
+                    {% for model in truck_models %}
+                    <option value="{{ model.id }}" {% if selected_model == model.id|stringformat:"s" %}selected{% endif %}>{{ model.name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Применить</button>
+            </form>
+        </div>
+
+        <!-- Таблица -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Бортовой номер</th>
+                    <th>Модель</th>
+                    <th>Макс. грузоподъемность</th>
+                    <th>Текущий вес</th>
+                    <th>Перегруз, %</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for truck in trucks %}
+                <tr>
+                    <td>{{ truck.board_number }}</td>
+                    <td>{{ truck.model.name }}</td>
+                    <td>{{ truck.model.max_capacity }} т</td>
+                    <td>{{ truck.current_load }} т</td>
+                    <td class="{% if truck.overload_pct > 100 %}overload{% endif %}">{{ truck.overload_pct }}%</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">Нет данных о самосвалах</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

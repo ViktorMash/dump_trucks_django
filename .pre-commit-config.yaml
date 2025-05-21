@@ -1,0 +1,31 @@
+default_language_version:
+  python: python3
+
+exclude: "^venv/|^.venv/"
+
+repos:
+  - repo: local
+    hooks:
+      - id: isort
+        name: isort
+        entry: isort
+        language: system
+        types: [python]
+        files: "^dump_trucks/"
+        exclude: "^venv/|^.venv/"
+
+      - id: black
+        name: black
+        entry: black
+        language: system
+        types: [python]
+        files: "^dump_trucks/"
+        exclude: "^venv/|^.venv/"
+
+      - id: flake8
+        name: flake8
+        entry: flake8 --config ./configs/.flake8 .
+        language: system
+        types: [python]
+        files: "^dump_trucks/"
+        exclude: "^venv/|^.venv/|.*/\\__init__\\.py$"

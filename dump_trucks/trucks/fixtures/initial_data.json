@@ -1,0 +1,45 @@
+[
+  {
+    "model": "trucks.truckmodel",
+    "pk": 1,
+    "fields": {
+      "name": "БЕЛАЗ",
+      "max_capacity": 120
+    }
+  },
+  {
+    "model": "trucks.truckmodel",
+    "pk": 2,
+    "fields": {
+      "name": "Komatsu",
+      "max_capacity": 110
+    }
+  },
+  {
+    "model": "trucks.truck",
+    "pk": 1,
+    "fields": {
+      "board_number": "101",
+      "model": 1,
+      "current_load": 100
+    }
+  },
+  {
+    "model": "trucks.truck",
+    "pk": 2,
+    "fields": {
+      "board_number": "102",
+      "model": 1,
+      "current_load": 125
+    }
+  },
+  {
+    "model": "trucks.truck",
+    "pk": 3,
+    "fields": {
+      "board_number": "K103",
+      "model": 2,
+      "current_load": 120
+    }
+  }
+  ]
